@@ -59,7 +59,12 @@ var products=[
   }
   
 ]
-  res.render('index',{products,login:user});
+  
+  var t = new Date(req.session.time);
+
+  let formattedTime = `Last login time > ${t.getHours()}:${t.getMinutes()}.${t.getSeconds()}s`;
+
+  res.render('index',{products,login:user,time:formattedTime});
 });
 
 router.get('/login',(req,res)=>{
@@ -80,6 +85,7 @@ userLogin.doLogin(req.body).then((response)=>{
   if(response.status){
     req.session.loggedIn=true;
     req.session.user = response.user;
+    req.session.time = new Date()
     setTimeout(()=>{
       res.redirect('/');
     },1000)
