@@ -59,7 +59,7 @@ var products=[
   }
   
 ]
-  res.render('index',{products,login:user,time:new Date()});
+  res.render('index',{products,login:user});
 });
 
 router.get('/login',(req,res)=>{
